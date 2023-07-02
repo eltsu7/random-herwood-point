@@ -70,8 +70,6 @@ def draw_on_map(
         text_position_x = MapLimits.lon_min + offset_x
         text_position_y = MapLimits.lat_min + offset_y
 
-        print(offset_x, offset_y * aspect_ratio)
-
         plt.text(
             text_position_x,
             text_position_y,
