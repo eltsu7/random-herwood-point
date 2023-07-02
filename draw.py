@@ -1,3 +1,5 @@
+import datetime
+
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
 
@@ -8,7 +10,7 @@ def draw_on_map(
     points: list[Point],
     show_image: bool = True,
     save_image: bool = False,
-    title: str = "",
+    plot_title: str = "",
     image_name: str = "",
 ):
     map_image = plt.imread(map_name)
@@ -30,7 +32,8 @@ def draw_on_map(
         ax.scatter(point.x, point.y, zorder=1, alpha=1, c="r", s=20)
         ax.annotate(int(point.z), (point.x + 0.0003, point.y + 0.0003), fontsize=14)
 
-    ax.set_title(title)
+    ax.set_title(plot_title, loc="left", fontsize=20)
+    ax.set_title(datetime.datetime.now(), loc="right", fontsize=10)
     ax.set_xlim(MapLimits.lon_min, MapLimits.lon_max)
     ax.set_ylim(MapLimits.lat_min, MapLimits.lat_max)
     ax.imshow(
@@ -44,6 +47,31 @@ def draw_on_map(
         ),
         aspect=aspect_ratio,
     )
+
+    points_in_text = ""
+
+    for point in points:
+        if points_in_text != "":
+            points_in_text += "\n"
+        points_in_text += f"{int(point.z)}: {format(point.y, '.6f')}, {format(point.x, '.6f')}"
+
+    offset = (MapLimits.lon_max - MapLimits.lon_min) * 0.02
+    text_position_x = MapLimits.lon_min + offset
+    text_position_y = MapLimits.lat_min + (offset * (map_image.shape[0] / map_image.shape[1]))
+
+    plt.text(
+        text_position_x,
+        text_position_y,
+        points_in_text,
+        fontsize=10,
+        # family="monospace",
+        bbox={
+            "boxstyle": "square",
+            "facecolor": "white",
+            "edgecolor": "gray"
+        }
+    )
+
     plt.axis("off")
     if save_image:
         if image_name == "":

@@ -5,6 +5,7 @@ from datetime import datetime
 
 week_number = datetime.now().isocalendar()[1]
 filename = f"images\\week_{week_number}"
+title = f"Viikko {week_number}"
 
 points = generate_random_points(5)
-draw_on_map(points, save_image=True, image_name=filename)
+draw_on_map(points, save_image=True, image_name=filename, plot_title=title)
