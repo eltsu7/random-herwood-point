@@ -14,7 +14,7 @@ for i, point in enumerate(points):
 draw_on_map(
     points,
     show_image=True,
-    save_image=False,
+    save_image=True,
     image_name=filename,
     plot_title=title,
     annotate=True,
