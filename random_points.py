@@ -1,11 +1,11 @@
 from shapely.geometry import Point, Polygon
 import numpy as np
 
-from map_properties import map_points
+from map_properties import map_points, list_of_holes
 
 
 def generate_random_points(number_of_points: int) -> list[Point]:
-    map_polygon = Polygon(map_points)
+    map_polygon = Polygon(map_points, holes=list_of_holes)
     boundaries = map_polygon.bounds
 
     points = []

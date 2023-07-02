@@ -12,6 +12,7 @@ def draw_on_map(
     save_image: bool = False,
     plot_title: str = "",
     image_name: str = "",
+    annonate: bool = True,
 ):
     map_image = plt.imread(map_name)
     aspect_ratio = (
@@ -28,9 +29,8 @@ def draw_on_map(
     y = [point[1] for point in map_points]
     ax.plot(x, y, zorder=1, alpha=0.5, c="b")
 
-    for i, point in enumerate(points):
+    for point in points:
         ax.scatter(point.x, point.y, zorder=1, alpha=1, c="r", s=20)
-        ax.annotate(int(point.z), (point.x + 0.0003, point.y + 0.0003), fontsize=14)
 
     ax.set_title(plot_title, loc="left", fontsize=20)
     ax.set_title(datetime.datetime.now(), loc="right", fontsize=10)
@@ -48,29 +48,38 @@ def draw_on_map(
         aspect=aspect_ratio,
     )
 
-    points_in_text = ""
+    if annonate:
+        for point in points:
+            ax.annotate(int(point.z), (point.x + 0.0003, point.y + 0.0003), fontsize=14)
 
-    for point in points:
-        if points_in_text != "":
-            points_in_text += "\n"
-        points_in_text += f"{int(point.z)}: {format(point.y, '.6f')}, {format(point.x, '.6f')}"
+        points_in_text = ""
 
-    offset = (MapLimits.lon_max - MapLimits.lon_min) * 0.02
-    text_position_x = MapLimits.lon_min + offset
-    text_position_y = MapLimits.lat_min + (offset * (map_image.shape[0] / map_image.shape[1]))
+        for point in points:
+            if points_in_text != "":
+                points_in_text += "\n"
+            points_in_text += f"{str(int(point.z)).rjust(2)}: {format(point.y, '.6f')}, {format(point.x, '.6f')}"
 
-    plt.text(
-        text_position_x,
-        text_position_y,
-        points_in_text,
-        fontsize=10,
-        # family="monospace",
-        bbox={
-            "boxstyle": "square",
-            "facecolor": "white",
-            "edgecolor": "gray"
-        }
-    )
+        offset_in_pixels = 50
+        offset_x = (
+            (MapLimits.lon_max - MapLimits.lon_min) / map_image.shape[1]
+        ) * offset_in_pixels
+        offset_y = (
+            (MapLimits.lat_max - MapLimits.lat_min) / map_image.shape[0]
+        ) * offset_in_pixels
+
+        text_position_x = MapLimits.lon_min + offset_x
+        text_position_y = MapLimits.lat_min + offset_y
+
+        print(offset_x, offset_y * aspect_ratio)
+
+        plt.text(
+            text_position_x,
+            text_position_y,
+            points_in_text,
+            fontsize=10,
+            family="monospace",
+            bbox={"boxstyle": "square", "facecolor": "white", "edgecolor": "gray"},
+        )
 
     plt.axis("off")
     if save_image:
