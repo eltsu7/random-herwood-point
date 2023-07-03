@@ -1,4 +1,5 @@
 import dataclasses
+import os.path
 
 
 @dataclasses.dataclass
@@ -9,7 +10,7 @@ class MapLimits:
     lon_max = 23.9183
 
 
-map_name = "maps\\hervanta_1.png"
+map_name = os.path.join("maps", "hervanta_1.png")
 
 map_points = [
     [23.901838, 61.44682],

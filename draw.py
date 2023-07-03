@@ -11,7 +11,7 @@ def draw_on_map(
     show_image: bool = True,
     save_image: bool = False,
     plot_title: str = "",
-    image_name: str = "",
+    image_names: list[str] = [],
     annotate: bool = True,
 ):
     map_image = plt.imread(map_name)
@@ -88,9 +88,10 @@ def draw_on_map(
     plt.axis("off")
 
     if save_image:
-        if image_name == "":
+        if not image_names:
             raise NameError("Filename is empty")
-        fig.savefig(image_name, bbox_inches="tight", pad_inches=0.2, dpi=200)
+        for filename in image_names:
+            fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)
 
     if show_image:
         plt.show()
