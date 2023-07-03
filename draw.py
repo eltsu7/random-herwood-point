@@ -94,7 +94,7 @@ def draw_on_map(
             with open(filename + ".txt", "w") as text_file:
                 for point in points:
                     text_file.write(
-                        f"{int(point.z)}: https://google.com/maps/search/?api=1&query="
+                        f"https://www.google.com/maps/search/"
                         f"{point.y},{point.x}\n"
                     )
             fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)

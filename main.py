@@ -16,7 +16,7 @@ title = f"Viikko {week_number}"
 
 points = generate_random_points(5)
 for i, point in enumerate(points):
-    print(f"{i + 1}: https://google.com/maps/search/?api=1&query={point.y},{point.x}")
+    print(f"{i + 1}: https://www.google.com/maps/search/?api=1&query={point.y},{point.x}")
 
 draw_on_map(
     points,
