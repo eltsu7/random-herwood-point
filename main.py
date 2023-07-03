@@ -1,4 +1,5 @@
 import os.path
+import sys
 
 from random_points import generate_random_points
 from draw import draw_on_map
@@ -19,7 +20,7 @@ for i, point in enumerate(points):
 
 draw_on_map(
     points,
-    show_image=True,
+    show_image=False,
     save_image=True,
     image_names=filenames,
     plot_title=title,
