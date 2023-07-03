@@ -11,8 +11,8 @@ def generate_random_points(number_of_points: int) -> list[Point]:
     points = []
 
     while len(points) < number_of_points:
-        x = np.random.uniform(boundaries[0], boundaries[2])
-        y = np.random.uniform(boundaries[1], boundaries[3])
+        x = round(np.random.uniform(boundaries[0], boundaries[2]), 4)
+        y = round(np.random.uniform(boundaries[1], boundaries[3]), 4)
         point = Point(x, y, len(points) + 1)
         if map_polygon.contains(point):
             points.append(point)
