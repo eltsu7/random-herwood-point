@@ -91,6 +91,12 @@ def draw_on_map(
         if not image_names:
             raise NameError("Filename is empty")
         for filename in image_names:
+            with open(filename + ".txt", "w") as text_file:
+                for point in points:
+                    text_file.write(
+                        f"{int(point.z)}: https://google.com/maps/search/?api=1&query="
+                        f"{point.y},{point.x}\n"
+                    )
             fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)
 
     if show_image:
