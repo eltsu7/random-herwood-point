@@ -12,7 +12,7 @@ filenames = [
     os.path.join("images", f"latest"),
 ]
 
-title = f"Viikko {week_number}"
+title = f"Viikon {week_number} kuvausrastit"
 
 points = generate_random_points(5)
 
