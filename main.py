@@ -18,8 +18,8 @@ points = generate_random_points(5)
 
 draw_on_map(
     points,
-    show_image=False,
-    save_files=True,
+    show_image=True,
+    save_files=False,
     file_names=file_names,
     plot_title=title,
     annotate=True,

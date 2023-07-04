@@ -4,7 +4,7 @@ import json
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
 
-from map_properties import map_points, MapLimits, map_name
+from map_properties import map_points, MapLimits, map_image_name, list_of_holes
 
 
 def draw_on_map(
@@ -15,7 +15,7 @@ def draw_on_map(
     file_names: list[str] = [],
     annotate: bool = True,
 ):
-    map_image = plt.imread(map_name)
+    map_image = plt.imread(map_image_name)
     aspect_ratio = (
         (map_image.shape[0] / map_image.shape[1])
         * (MapLimits.lon_max - MapLimits.lon_min)
@@ -33,6 +33,15 @@ def draw_on_map(
         alpha=0.5,
         c="b",
     )
+
+    for hole in list_of_holes:
+        ax.plot(
+            [point[0] for point in hole],
+            [point[1] for point in hole],
+            zorder=1,
+            alpha=0.3,
+            c="b",
+        )
 
     for point in points:
         ax.scatter(point.x, point.y, zorder=1, alpha=1, c="r", s=20)
