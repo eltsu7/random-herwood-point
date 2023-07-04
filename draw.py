@@ -12,7 +12,7 @@ def draw_on_map(
     show_image: bool = True,
     save_files: bool = False,
     plot_title: str = "",
-    image_names: list[str] = [],
+    file_names: list[str] = [],
     annotate: bool = True,
 ):
     map_image = plt.imread(map_name)
@@ -101,9 +101,9 @@ def draw_on_map(
     print(output_json)
 
     if save_files:
-        if not image_names:
+        if not file_names:
             raise NameError("Filename is empty")
-        for filename in image_names:
+        for filename in file_names:
             with open(filename + ".txt", "w") as text_file:
                 text_file.write(output_json)
             fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)

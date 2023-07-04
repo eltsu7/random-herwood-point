@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 week_number = datetime.now().isocalendar()[1]
-filenames = [
+file_names = [
     os.path.join("images", f"week_{week_number}_{int(datetime.now().timestamp())}"),
     os.path.join("images", f"latest"),
 ]
@@ -20,7 +20,7 @@ draw_on_map(
     points,
     show_image=False,
     save_files=True,
-    image_names=filenames,
+    file_names=file_names,
     plot_title=title,
     annotate=True,
 )
