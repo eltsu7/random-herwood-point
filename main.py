@@ -15,13 +15,11 @@ filenames = [
 title = f"Viikko {week_number}"
 
 points = generate_random_points(5)
-for i, point in enumerate(points):
-    print(f"{i + 1}: https://www.google.com/maps/search/{point.y},{point.x}")
 
 draw_on_map(
     points,
     show_image=False,
-    save_image=True,
+    save_files=True,
     image_names=filenames,
     plot_title=title,
     annotate=True,

@@ -1,4 +1,5 @@
 import datetime
+import json
 
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
@@ -9,7 +10,7 @@ from map_properties import map_points, MapLimits, map_name
 def draw_on_map(
     points: list[Point],
     show_image: bool = True,
-    save_image: bool = False,
+    save_files: bool = False,
     plot_title: str = "",
     image_names: list[str] = [],
     annotate: bool = True,
@@ -84,19 +85,27 @@ def draw_on_map(
             family="monospace",
             bbox={"boxstyle": "square", "facecolor": "white", "edgecolor": "gray"},
         )
-
     plt.axis("off")
 
-    if save_image:
+    output_text_dict: dict = {
+        "title": plot_title,
+        "links": []
+    }
+
+    for point in points:
+        output_text_dict["links"].append(
+            f"https://www.google.com/maps/search/"
+            f"{point.y},{point.x}"
+        )
+    output_json: str = json.dumps(output_text_dict, indent=4)
+    print(output_json)
+
+    if save_files:
         if not image_names:
             raise NameError("Filename is empty")
         for filename in image_names:
             with open(filename + ".txt", "w") as text_file:
-                for point in points:
-                    text_file.write(
-                        f"https://www.google.com/maps/search/"
-                        f"{point.y},{point.x}\n"
-                    )
+                text_file.write(output_json)
             fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)
 
     if show_image:
