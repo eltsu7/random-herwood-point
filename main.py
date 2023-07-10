@@ -26,7 +26,9 @@ except (ValueError, IndexError):
     seed = int(datetime.now().timestamp() * 1000000)
 
 title = f"Viikon {calendar_week_number} kuvausrastit"
-points = generate_random_points(number_of_points=5, week_offset=point_week_number, seed=seed)
+points = generate_random_points(
+    number_of_points=5, week_offset=point_week_number, seed=seed
+)
 
 draw_on_map(
     points,

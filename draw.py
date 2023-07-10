@@ -100,11 +100,7 @@ def draw_on_map(
         )
     plt.axis("off")
 
-    output_text_dict: dict = {
-        "title": plot_title,
-        "links": {},
-        "seed": seed
-    }
+    output_text_dict: dict = {"title": plot_title, "links": {}, "seed": seed}
 
     for point in points:
         link = f"https://www.google.com/maps/search/{point.y},{point.x}"

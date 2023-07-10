@@ -4,7 +4,9 @@ import numpy as np
 from map_properties import map_points, list_of_holes
 
 
-def generate_random_points(number_of_points: int, week_offset: int, seed: int = 0) -> list[Point]:
+def generate_random_points(
+    number_of_points: int, week_offset: int, seed: int = 0
+) -> list[Point]:
     map_polygon = Polygon(map_points, holes=list_of_holes)
     boundaries = map_polygon.bounds
     random_generator = np.random.default_rng(seed)
