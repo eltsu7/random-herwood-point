@@ -73,7 +73,10 @@ def draw_on_map(
         for point in points:
             if points_in_text != "":
                 points_in_text += "\n"
-            points_in_text += f"{str(int(point.z)).rjust(2)}: {format(point.y, '.6f')}, {format(point.x, '.6f')}"
+            points_in_text += (
+                f"{str(int(point.z)).rjust(2)}: "
+                f"{format(point.y, '.4f')}, {format(point.x, '.4f')}"
+            )
 
         offset_in_pixels = 50
         offset_x = (
@@ -98,14 +101,17 @@ def draw_on_map(
 
     output_text_dict: dict = {
         "title": plot_title,
-        "links": []
+        "links": [],
+        "telegram_message": "",
     }
 
-    for point in points:
-        output_text_dict["links"].append(
-            f"https://www.google.com/maps/search/"
-            f"{point.y},{point.x}"
-        )
+    for i, point in enumerate(points):
+        link = f"https://www.google.com/maps/search/{point.y},{point.x}"
+        output_text_dict["links"].append(link)
+        output_text_dict[
+            "telegram_message"
+        ] += f"<a href='{link}'>Piste {int(point.z)}</a> "
+
     output_json: str = json.dumps(output_text_dict, indent=4)
     print(output_json)
 

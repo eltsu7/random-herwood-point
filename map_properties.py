@@ -18,6 +18,8 @@ map_points: list
 list_of_holes: list
 with open(map_data_name, "r") as file:
     umap_dict = json.loads(file.read())
-    all_coordinates: dict = umap_dict["layers"][0]["features"][0]["geometry"]["coordinates"]
+    all_coordinates: dict = umap_dict["layers"][0]["features"][0]["geometry"][
+        "coordinates"
+    ]
     map_points = all_coordinates[0]
     list_of_holes = all_coordinates[1:]

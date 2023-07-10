@@ -6,11 +6,15 @@ from random_points import generate_random_points
 from draw import draw_on_map
 from datetime import datetime
 
-point_week_number: int = (datetime.now() - datetime(year=2023, month=7, day=3)).days // 7
+point_week_number: int = (
+    datetime.now() - datetime(year=2023, month=7, day=3)
+).days // 7
 calendar_week_number: int = datetime.now().isocalendar()[1]
 
 file_names = [
-    os.path.join("images", f"week_{calendar_week_number}_{int(datetime.now().timestamp())}"),
+    os.path.join(
+        "images", f"week_{calendar_week_number}_{int(datetime.now().timestamp())}"
+    ),
     os.path.join("images", f"latest"),
 ]
 
