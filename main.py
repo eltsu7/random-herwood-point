@@ -31,7 +31,7 @@ points = generate_random_points(number_of_points=5, week_offset=point_week_numbe
 draw_on_map(
     points,
     show_image=False,
-    save_files=False,
+    save_files=True,
     file_names=file_names,
     plot_title=title,
     annotate=True,
