@@ -1,4 +1,5 @@
 import os.path
+import sys
 
 import shapely
 
@@ -19,14 +20,20 @@ file_names = [
     os.path.join("images", f"latest"),
 ]
 
+try:
+    seed = int(sys.argv[1])
+except (ValueError, IndexError):
+    seed = int(datetime.now().timestamp() * 1000000)
+
 title = f"Viikon {calendar_week_number} kuvausrastit"
-points = generate_random_points(number_of_points=5, week_offset=point_week_number)
+points = generate_random_points(number_of_points=5, week_offset=point_week_number, seed=seed)
 
 draw_on_map(
     points,
     show_image=False,
-    save_files=True,
+    save_files=False,
     file_names=file_names,
     plot_title=title,
     annotate=True,
+    seed=seed,
 )

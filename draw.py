@@ -14,6 +14,7 @@ def draw_on_map(
     plot_title: str = "",
     file_names: list[str] = [],
     annotate: bool = True,
+    seed: int = 0,
 ):
     map_image = plt.imread(map_image_name)
     aspect_ratio = (
@@ -102,6 +103,7 @@ def draw_on_map(
     output_text_dict: dict = {
         "title": plot_title,
         "links": {},
+        "seed": seed
     }
 
     for point in points:
