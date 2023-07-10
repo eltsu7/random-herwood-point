@@ -15,6 +15,7 @@ file_names = [
     os.path.join(
         "images", f"week_{calendar_week_number}_{int(datetime.now().timestamp())}"
     ),
+    os.path.join("images", f"week_{calendar_week_number}"),
     os.path.join("images", f"latest"),
 ]
 
