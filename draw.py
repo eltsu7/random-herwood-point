@@ -101,16 +101,12 @@ def draw_on_map(
 
     output_text_dict: dict = {
         "title": plot_title,
-        "links": [],
-        "telegram_message": "",
+        "links": {},
     }
 
-    for i, point in enumerate(points):
+    for point in points:
         link = f"https://www.google.com/maps/search/{point.y},{point.x}"
-        output_text_dict["links"].append(link)
-        output_text_dict[
-            "telegram_message"
-        ] += f"<a href='{link}'>Piste {int(point.z)}</a> "
+        output_text_dict["links"][str(int(point.z))] = link
 
     output_json: str = json.dumps(output_text_dict, indent=4)
     print(output_json)
