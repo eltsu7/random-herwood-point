@@ -33,9 +33,9 @@ points = generate_random_points(
 gpx_output(
     points=points,
     title=title,
-    file_names=file_names
+    file_names=file_names,
+    save_output=True,
 )
-exit()
 json_output(
     points=points,
     file_names=file_names,

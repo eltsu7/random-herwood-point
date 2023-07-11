@@ -31,7 +31,6 @@ def gpx_output(
     title: str,
     file_names: list[str] = [],
     save_output: bool = True,
-    seed: int = 0,
 ):
     map = gpx.GPX()
     map.name = title
