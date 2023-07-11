@@ -5,6 +5,7 @@ import shapely
 
 from random_points import generate_random_points
 from draw import draw_on_map
+from text_output import json_output, gpx_output
 from datetime import datetime
 
 point_week_number: int = (
@@ -29,7 +30,19 @@ title = f"Viikon {calendar_week_number} kuvausrastit"
 points = generate_random_points(
     number_of_points=5, week_offset=point_week_number, seed=seed
 )
-
+gpx_output(
+    points=points,
+    title=title,
+    file_names=file_names
+)
+exit()
+json_output(
+    points=points,
+    file_names=file_names,
+    title=title,
+    save_output=True,
+    seed=seed
+)
 draw_on_map(
     points,
     show_image=False,
@@ -37,5 +50,4 @@ draw_on_map(
     file_names=file_names,
     plot_title=title,
     annotate=True,
-    seed=seed,
 )

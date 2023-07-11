@@ -14,7 +14,6 @@ def draw_on_map(
     plot_title: str = "",
     file_names: list[str] = [],
     annotate: bool = True,
-    seed: int = 0,
 ):
     map_image = plt.imread(map_image_name)
     aspect_ratio = (
@@ -100,21 +99,10 @@ def draw_on_map(
         )
     plt.axis("off")
 
-    output_text_dict: dict = {"title": plot_title, "links": {}, "seed": seed}
-
-    for point in points:
-        link = f"https://www.google.com/maps/search/{point.y},{point.x}"
-        output_text_dict["links"][str(int(point.z))] = link
-
-    output_json: str = json.dumps(output_text_dict, indent=4)
-    print(output_json)
-
     if save_files:
         if not file_names:
             raise NameError("Filename is empty")
         for filename in file_names:
-            with open(filename + ".txt", "w") as text_file:
-                text_file.write(output_json)
             fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)
 
     if show_image:
