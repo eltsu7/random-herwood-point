@@ -10,7 +10,6 @@ from map_properties import map_points, MapLimits, map_image_name, list_of_holes
 def draw_on_map(
     points: list[Point],
     show_image: bool = True,
-    save_files: bool = False,
     plot_title: str = "",
     file_names: list[str] = [],
     annotate: bool = True,
@@ -99,11 +98,8 @@ def draw_on_map(
         )
     plt.axis("off")
 
-    if save_files:
-        if not file_names:
-            raise NameError("Filename is empty")
-        for filename in file_names:
-            fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)
+    for filename in file_names:
+        fig.savefig(filename, bbox_inches="tight", pad_inches=0.2, dpi=200)
 
     if show_image:
         plt.show()
