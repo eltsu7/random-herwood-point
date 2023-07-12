@@ -7,15 +7,21 @@ import pathlib
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--out", type=pathlib.Path, help="Output folder")
+parser.add_argument(
+    "--out",
+    type=pathlib.Path,
+    help="Output folder, leave empty if you don't want to save results.",
+)
 parser.add_argument(
     "--show",
     type=bool,
-    help="Show plot",
+    help="Show plot after it's generated.",
     default=False,
     action=argparse.BooleanOptionalAction,
 )
-parser.add_argument("--seed", type=int, help="RNG seed (integer)")
+parser.add_argument(
+    "--seed", type=int, help="RNG seed as integer, leave empty for random."
+)
 args: argparse.Namespace = parser.parse_args()
 
 now = datetime.now()
